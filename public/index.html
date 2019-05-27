@@ -1,0 +1,57 @@
+<!DOCTYPE>
+<html>
+  <head>
+    <meta charset="UTF-8">
+
+    <title>AWS map</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="theme-color" content="#11a8dc">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#11a8dc">
+
+    <style>
+      body {
+        background-color: #eeeeee;
+        color: #555555;
+        font-family: "Lucida Console", Monaco, monospace;
+      }
+
+      *::selection {
+        background-color: #222222;
+        color: silver;
+      }
+
+      @-webkit-keyframes fadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }
+
+      .splashscreen {
+        height: 100vh;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        animation-duration: 2s;
+        animation-name: fadeIn;
+      }
+
+      noscript {
+        color: magenta;
+        text-align: center;
+        font-size: 5vh;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="splashscreen">
+      <h1>AWS map</h1>
+
+      <noscript>
+        <p>Opsss... your JavaScript looks disabled 😒</p>
+      </noscript>
+    </section>
+
+    <div id="root"></div>
+  </body>
+</html>
