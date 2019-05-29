@@ -1,0 +1,23 @@
+{
+  "name": "aws-map.com",
+  "version": "0.0.0",
+  "private": true,
+  "description": "a global view for your AWS accounts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fibo/aws-map.com.git"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Gianluca Casati",
+    "url": "http://g14n.info"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fibo/aws-map.com/issues"
+  },
+  "homepage": "https://github.com/fibo/aws-map.com#readme"
+}
