@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/fibo/aws-map.com/issues"
   },
-  "homepage": "https://github.com/fibo/aws-map.com#readme"
+  "homepage": "https://github.com/fibo/aws-map.com#readme",
+  "devDependencies": {
+    "dot-editorconfig": "^1.1.1"
+  }
 }
