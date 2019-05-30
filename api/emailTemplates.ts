@@ -23,7 +23,7 @@ export function createAccountEmail(verificationId: string): IEmailMessage {
   }
 }
 
-export function forgotPasswordEmail(password: string): IEmailMessage {
+export function resetPasswordEmail(password: string): IEmailMessage {
   const enterUrl = `https://${nakedDomain}/enter`
 
   return {

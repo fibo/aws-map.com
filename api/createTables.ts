@@ -7,4 +7,3 @@ function createTableCallback (err, data) {
 
   console.log(JSON.stringify(data, null, "\t"))
 }
-

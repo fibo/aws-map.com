@@ -4,7 +4,7 @@ import { nakedDomain } from "./domainNames"
 
 import {
   createAccountEmail,
-  forgotPasswordEmail,
+  resetPasswordEmail,
   IEmailMessage,
 } from "./emailTemplates"
 
@@ -43,8 +43,8 @@ export function sendCreateAccountEmail(destinationEmail: string, verificationId:
   return sendEmail(destinationEmail, emailMessage, callback)
 }
 
-export function sendForgotPasswordEmail(destinationEmail: string, password: string, callback) {
-  const emailMessage = forgotPasswordEmail(password)
+export function sendResetPasswordEmail(destinationEmail: string, password: string, callback) {
+  const emailMessage = resetPasswordEmail(password)
 
   return sendEmail(destinationEmail, emailMessage, callback)
 }

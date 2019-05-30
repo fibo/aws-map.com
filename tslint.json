@@ -1,7 +1,9 @@
 {
   "extends": ["tslint:latest"],
   "rules": {
+    "curly": [true, "ignore-same-line"],
     "member-access": [true, "no-public"],
+    "no-console": false,
     "no-implicit-dependencies": [true, "dev"],
     "ordered-imports": [true,
       {

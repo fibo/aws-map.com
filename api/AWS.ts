@@ -4,4 +4,6 @@ export const region = "us-east-1"
 
 AWS.config.update({ region })
 
-export default AWS
+export default {
+  DynamoDB: AWS.DynamoDB
+}

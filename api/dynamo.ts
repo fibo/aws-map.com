@@ -1,4 +1,9 @@
+import no from "not-defined"
+
 import * as AWS from "./AWS"
+import {
+  EmailNotFoundError
+} from "./errors"
 
 const documentClient = new AWS.DynamoDB.DocumentClient()
 
@@ -8,7 +13,7 @@ const tableNamePrefix = "AWSMap"
 
 const UserTableName = `${tableNamePrefix}User`
 
-export function createTableUser(callback) {
+export function createUserTable(callback) {
   service.createTable({
     AttributeDefinitions: [
       { AttributeName: "email", AttributeType: "S" }
@@ -20,4 +25,22 @@ export function createTableUser(callback) {
     StreamSpecification: { StreamEnabled: false },
     TableName: UserTableName
   }, callback)
+}
+
+export function getUser(email, callback) {
+  try {
+    documentClient.get({
+      Key: { email },
+      ProjectionExpression: "accountCode",
+      TableName: UserTableName
+    }, (error, data) => {
+      if (error) return callback(error)
+
+      if (no(data)) return callback(new EmailNotFoundError())
+
+      callback(null, data.Item)
+    })
+  } catch (error) {
+    callback(error)
+  }
 }
