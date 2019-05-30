@@ -1,3 +1,5 @@
+import { apiDomain, nakedDomain } from "./domainNames"
+
 export interface IEmailMessage {
   html: string
   subject: string
@@ -5,7 +7,7 @@ export interface IEmailMessage {
 }
 
 export function createAccountEmail(verificationId: string): IEmailMessage {
-  const verificationUrl = `https://api.aws-map.com/v1/verify/${verificationId}`
+  const verificationUrl = `https://${apiDomain}/v1/verify/${verificationId}`
 
   return {
     html: `
@@ -22,7 +24,7 @@ export function createAccountEmail(verificationId: string): IEmailMessage {
 }
 
 export function forgotPasswordEmail(password: string): IEmailMessage {
-  const enterUrl = "https://aws-map.com/enter"
+  const enterUrl = `https://${nakedDomain}/enter`
 
   return {
     html: `
