@@ -1,0 +1,9 @@
+{
+  "extends": ["tslint:latest"],
+  "rules": {
+    "member-access": [true, "no-public"],
+    "no-implicit-dependencies": [true, "dev"],
+    "semicolon": [true, "never"],
+    "trailing-comma": false
+  }
+}

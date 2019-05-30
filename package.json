@@ -21,6 +21,10 @@
   },
   "homepage": "https://github.com/fibo/aws-map.com#readme",
   "devDependencies": {
-    "dot-editorconfig": "^1.1.1"
+    "@types/node": "^12.0.3",
+    "dot-editorconfig": "^1.1.1",
+    "tslib": "^1.9.3",
+    "tslint": "^5.16.0",
+    "typescript": "^3.5.1"
   }
 }
