@@ -1,5 +1,7 @@
 import * as AWS from "aws-sdk"
 
+import { nakedDomain } from "./domainNames"
+
 import {
   createAccountEmail,
   forgotPasswordEmail,
@@ -31,7 +33,7 @@ function sendEmail(destination: string, message: IEmailMessage, callback) {
       },
       Subject: { Charset, Data: message.subject }
     },
-    Source: "no-reply@go-seven.com"
+    Source: `no-reply@${nakedDomain}`
   }, callback)
 }
 
