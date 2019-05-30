@@ -4,8 +4,14 @@
   "private": true,
   "description": "a global view for your AWS accounts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tsc--noemit": "tsc --declaration --project . --noemit",
+    "tslint": "tslint --project ."
   },
+  "pre-commit": [
+    "tsc--noemit",
+    "tslint"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/fibo/aws-map.com.git"
@@ -24,6 +30,7 @@
     "@types/node": "^12.0.3",
     "aws-sdk": "^2.465.0",
     "dot-editorconfig": "^1.1.1",
+    "pre-commit": "^1.2.2",
     "tslib": "^1.9.3",
     "tslint": "^5.16.0",
     "typescript": "^3.5.1"

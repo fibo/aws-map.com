@@ -1,9 +1,9 @@
 import * as AWS from "aws-sdk"
 
 import {
-  IEmailMessage,
   createAccountEmail,
   forgotPasswordEmail,
+  IEmailMessage,
 } from "./emailTemplates"
 
 const ses = new AWS.SES({ apiVersion: "2010-12-01", region: "us-east-1" })

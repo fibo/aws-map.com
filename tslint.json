@@ -3,6 +3,11 @@
   "rules": {
     "member-access": [true, "no-public"],
     "no-implicit-dependencies": [true, "dev"],
+    "ordered-imports": [true,
+      {
+        "named-imports-order": "lowercase-first"
+      }
+    ],
     "semicolon": [true, "never"],
     "trailing-comma": false
   }
