@@ -1,4 +1,5 @@
 import * as AWS from "aws-sdk"
+import { promisify } from "util"
 
 import { nakedDomain } from "./domainNames"
 
@@ -19,7 +20,7 @@ const ses = new AWS.SES({ apiVersion: "2010-12-01", region: "us-east-1" })
  *   MessageId: "010001686c261df8-b66c028f-d423-44f7-b22e-bb6d1ff9de3c-000000"
  * }
  */
-function sendEmail(destination: string, message: IEmailMessage, callback) {
+function sendEmailWithCallback(destination: string, message: IEmailMessage, callback) {
   const Charset = "UTF-8"
 
   return ses.sendEmail({
@@ -37,14 +38,16 @@ function sendEmail(destination: string, message: IEmailMessage, callback) {
   }, callback)
 }
 
-export function sendCreateAccountEmail(destinationEmail: string, verificationId: string, callback) {
+const sendEmail = promisify(sendEmailWithCallback)
+
+export function createAccount(destinationEmail: string, verificationId: string) {
   const emailMessage = createAccountEmail(verificationId)
 
-  return sendEmail(destinationEmail, emailMessage, callback)
+  return sendEmail(destinationEmail, emailMessage)
 }
 
-export function sendResetPasswordEmail(destinationEmail: string, password: string, callback) {
+function resetPassword(destinationEmail: string, password: string) {
   const emailMessage = resetPasswordEmail(password)
 
-  return sendEmail(destinationEmail, emailMessage, callback)
+  return sendEmail(destinationEmail, emailMessage)
 }

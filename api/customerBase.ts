@@ -1,10 +1,6 @@
-import {
-  getUser
-} from "./dynamo"
+import * as dynamo from "./dynamo"
 
-import {
-  sendResetPasswordEmail
-} from "./sendEmail"
+import * as sendEmail from "./sendEmail"
 
 interface IAccountCredentials {
   email: string

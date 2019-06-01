@@ -3,7 +3,6 @@
     "allowJs": false,
     "charset": "utf8",
     "esModuleInterop": true,
-    "importHelpers": true,
     "module": "commonjs",
     "noImplicitUseStrict": true,
     "removeComments": true,

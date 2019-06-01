@@ -1,5 +1,6 @@
 import * as AWS from "aws-sdk"
 import no from "not-defined"
+import { promisify } from "util"
 
 import { region } from "./region"
 
@@ -31,7 +32,7 @@ export function createUserTable(callback) {
   }, callback)
 }
 
-export function getUser(email, callback) {
+function getUser(email, callback) {
   try {
     documentClient.get({
       Key: { email },
@@ -47,4 +48,8 @@ export function getUser(email, callback) {
   } catch (error) {
     callback(error)
   }
+}
+
+export default {
+  getUser: promisify(getUser)
 }

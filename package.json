@@ -41,7 +41,6 @@
     "dot-editorconfig": "^1.1.1",
     "pre-commit": "^1.2.2",
     "tsify": "^4.0.1",
-    "tslib": "^1.9.3",
     "tslint": "^5.17.0",
     "typescript": "^3.5.1"
   },
