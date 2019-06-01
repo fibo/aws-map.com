@@ -1,1 +1,5 @@
 node_modules
+
+# lambdas
+build.zip
+build/

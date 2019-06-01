@@ -4,6 +4,9 @@
   "private": true,
   "description": "a global view for your AWS accounts",
   "scripts": {
+    "iam_attach_policy": "aws iam attach-role-policy --policy-arn arn:aws:iam::${AWS_ACCOUNT_ID}:policy/${npm_package_config_policy} --role-name ${npm_package_config_role} --profile ${npm_package_config_profile}",
+    "iam_create_role": "aws iam create-role --role-name ${npm_package_config_role} --assume-role-policy-document file://api/iam/trust-service.json --profile ${npm_package_config_profile}",
+    "iam_create_policy": "aws iam create-policy --policy-name ${npm_package_config_policy} --policy-document file://api/iam/lambda-policy.json --profile ${npm_package_config_profile}",
     "test": "echo \"Error: no test specified\" && exit 1",
     "tsc--noemit": "tsc --declaration --project . --noemit",
     "tslint": "tslint --project ."
@@ -12,11 +15,18 @@
     "tsc--noemit",
     "tslint"
   ],
+  "config": {
+    "role": "AWSMapApi",
+    "policy": "AWSMapLambda",
+    "profile": "AWSMap"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/fibo/aws-map.com.git"
   },
-  "keywords": [],
+  "keywords": [
+    "aws"
+  ],
   "author": {
     "name": "Gianluca Casati",
     "url": "http://g14n.info"
@@ -27,15 +37,17 @@
   },
   "homepage": "https://github.com/fibo/aws-map.com#readme",
   "devDependencies": {
-    "@types/node": "^12.0.3",
-    "aws-sdk": "^2.465.0",
+    "@types/node": "^12.0.4",
     "dot-editorconfig": "^1.1.1",
     "pre-commit": "^1.2.2",
+    "tsify": "^4.0.1",
     "tslib": "^1.9.3",
-    "tslint": "^5.16.0",
+    "tslint": "^5.17.0",
     "typescript": "^3.5.1"
   },
   "dependencies": {
+    "aws-lambda-res": "^1.0.0",
+    "aws-sdk": "^2.465.0",
     "not-defined": "^2.1.0"
   }
 }

@@ -13,22 +13,22 @@ interface IAccountCredentials {
 
 export function createAccount({ email, password }: IAccountCredentials, callback) {
   // Check if user email is already registered.
-  getUser(email, (error) => {
+  // getUser(email, (error) => {
 
-  })
+  // })
 }
 
 export function enterAccount({ email, password }: IAccountCredentials, callback) {
-  getUser(email, (error, user) => {
+  // getUser(email, (error, user) => {
 
-  })
+  // })
 }
 
-export function resetPassword() {
+export function resetPassword(email) {
   // Check if user email is actually registered.
-  getUser(email, (error) => {
-    sendResetPasswordEmail(email)
-  })
+  // getUser(email, (error) => {
+  //   sendResetPasswordEmail(email)
+  // })
 }
 
 export function verifyEmail() {

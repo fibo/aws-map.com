@@ -1,0 +1,41 @@
+{
+  "name": "awsmap-create-account",
+  "version": "0.0.0",
+  "description": "AWSMap account creation",
+  "private": true,
+  "main": "index.ts",
+  "scripts": {
+    "browserify": "browserify --node -x aws-sdk -p tsify -o build/index.js -s exports $npm_package_main",
+    "create": "aws lambda create-function --region ${AWS_REGION} --profile ${npm_package_config_profile} --function-name ${npm_package_name} --description \"${npm_package_description}\" --runtime nodejs8.10 --handler index.handler --role arn:aws:iam::${AWS_ACCOUNT_ID}:role/${npm_package_config_role} --zip-file fileb://build.zip",
+    "create_log_group": "aws logs create-log-group --log-group-name /aws/lambda/$npm_package_name",
+    "delete": "aws lambda delete-function --region $npm_package_config_region --profile $npm_package_config_profile --function-name $npm_package_name",
+    "delete_log_group": "aws logs delete-log-group --log-group-name /aws/lambda/$npm_package_name",
+    "deploy": "aws lambda update-function-code --region ${npm_package_config_region} --profile ${npm_package_config_profile} --function-name ${npm_package_name} --zip-file fileb://build.zip",
+    "postcreate": "npm run create_log_group; npm run set_timeout",
+    "prebrowserify": "rm -rf build; mkdir build",
+    "postcreate_log_group": "npm run set_log_retention",
+    "postdelete": "npm run delete_log_group",
+    "precreate": "npm run zip",
+    "predeploy": "npm run zip",
+    "prezip": "rm build.zip; npm install; npm run browserify",
+    "set_environment": "aws lambda update-function-configuration --region ${npm_package_config_region} --profile ${npm_package_config_profile} --function-name ${npm_package_name} --environment \"Variables={JWT_SECRET=$JWT_SECRET}\"",
+    "set_log_retention": "aws logs put-retention-policy --region ${npm_package_config_region} --log-group-name /aws/lambda/$npm_package_name --retention-in-days $npm_package_config_log_retention",
+    "set_timeout": "aws lambda update-function-configuration --region ${npm_package_config_region} --profile ${npm_package_config_profile} --function-name ${npm_package_name} --timeout ${npm_package_config_timeout}",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "zip": "cd build; zip -X -r ../build.zip * > /dev/null; cd .."
+  },
+  "config": {
+    "log_retention": 7,
+    "profile": "AWSMap",
+    "region": "us-east-1",
+    "role": "AWSMapApi",
+    "timeout": 12
+  },
+  "author": "Gianluca Casati (http://g14n.info)",
+  "license": "MIT",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "browserify": "^16.2.3"
+  }
+}

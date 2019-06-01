@@ -10,7 +10,7 @@ class APIError extends Error {
 }
 
 export class EmailNotFoundError extends APIError {
-  constructor () {
+  constructor() {
     super("Email not found")
   }
 }

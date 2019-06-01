@@ -1,6 +1,10 @@
+import * as AWS from "aws-sdk"
 import no from "not-defined"
 
-import * as AWS from "./AWS"
+import { region } from "./region"
+
+AWS.config.update({ region })
+
 import {
   EmailNotFoundError
 } from "./errors"
@@ -9,7 +13,7 @@ const documentClient = new AWS.DynamoDB.DocumentClient()
 
 const service = new AWS.DynamoDB({ apiVersion: "2012-10-08" })
 
-const tableNamePrefix = "AWSMap"
+export const tableNamePrefix = "AWSMap"
 
 const UserTableName = `${tableNamePrefix}User`
 

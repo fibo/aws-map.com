@@ -2,5 +2,6 @@
 
 > a global view for your AWS accounts
 
-This repo contains also example code for [Serverless React PWA on AWS](https://github.com/fibo/Serverless-React-PWA-on-AWS) workshop in [this homonym branch](https://github.com/fibo/aws-map.com/tree/Serverless-React-PWA-on-AWS)
+This repo contains also example code for [Serverless React PWA on AWS](https://github.com/fibo/Serverless-React-PWA-on-AWS) workshop in [this homonym branch](https://github.com/fibo/aws-map.com/tree/Serverless-React-PWA-on-AWS).
 
+Other than that it starts from the workshop instructions as a foundation, than evolves on its own.

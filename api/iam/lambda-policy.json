@@ -1,0 +1,39 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+      ],
+      "Resource": "arn:aws:logs:us-east-1:888671539518:*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "dynamodb:DeleteItem",
+        "dynamodb:ListTables",
+        "dynamodb:GetItem",
+        "dynamodb:PutItem",
+        "dynamodb:Query",
+        "dynamodb:Scan"
+      ],
+      "Resource": "arn:aws:dynamodb:us-east-1:888671539518:table/AWSMap*"
+    },
+    {
+      "Effect":"Allow",
+      "Resource":"arn:aws:ses:us-east-1:888671539518:identity/aws-map.com",
+      "Action":[
+        "SES:SendEmail",
+        "SES:SendRawEmail"
+      ],
+      "Condition":{
+        "StringLike":{
+          "ses:FromAddress":"no-reply@aws-map.com"
+        }
+      }
+    }
+  ]
+}
