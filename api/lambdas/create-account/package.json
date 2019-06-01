@@ -33,7 +33,9 @@
   },
   "author": "Gianluca Casati (http://g14n.info)",
   "license": "MIT",
-  "dependencies": {
+  "dependencies": {},
+  "peerDependencies": {
+    "aws-lambda-res": "^1.0.0"
   },
   "devDependencies": {
     "browserify": "^16.2.3"

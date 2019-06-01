@@ -47,6 +47,7 @@
   "dependencies": {
     "aws-lambda-res": "^1.0.0",
     "aws-sdk": "^2.465.0",
+    "jsonwebtoken": "^8.5.1",
     "not-defined": "^2.1.0"
   }
 }

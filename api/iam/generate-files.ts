@@ -5,6 +5,7 @@ import { promisify } from "util"
 
 import { nakedDomain } from "../domainNames"
 import { tableNamePrefix } from "../dynamo"
+import { MissingAwsAccountIdError } from "../errors"
 import { region as AWS_REGION } from "../region"
 
 const writeFile = promisify(fs.writeFile)
@@ -12,7 +13,7 @@ const writeFile = promisify(fs.writeFile)
 const AWS_ACCOUNT_ID = process.env.AWS_ACCOUNT_ID
 
 if (no(AWS_ACCOUNT_ID)) {
-  throw new Error("Missing AWS_ACCOUNT_ID environment variable")
+  throw new MissingAwsAccountIdError()
 }
 
 const lambdaPolicy = `{

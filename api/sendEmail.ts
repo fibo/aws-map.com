@@ -2,6 +2,7 @@ import * as AWS from "aws-sdk"
 import { promisify } from "util"
 
 import { nakedDomain } from "./domainNames"
+import { region } from "./region"
 
 import {
   createAccountEmail,
@@ -9,7 +10,7 @@ import {
   IEmailMessage,
 } from "./emailTemplates"
 
-const ses = new AWS.SES({ apiVersion: "2010-12-01", region: "us-east-1" })
+const ses = new AWS.SES({ apiVersion: "2010-12-01", region })
 
 /**
  *
@@ -40,8 +41,8 @@ function sendEmailWithCallback(destination: string, message: IEmailMessage, call
 
 const sendEmail = promisify(sendEmailWithCallback)
 
-export function createAccount(destinationEmail: string, verificationId: string) {
-  const emailMessage = createAccountEmail(verificationId)
+export function createAccount(destinationEmail: string, token: string) {
+  const emailMessage = createAccountEmail(token)
 
   return sendEmail(destinationEmail, emailMessage)
 }

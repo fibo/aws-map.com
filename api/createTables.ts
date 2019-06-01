@@ -1,9 +1,8 @@
-import {
-  createUserTable,
-} from "./dynamo"
+import * as dynamo from "./dynamo"
 
-function createTableCallback(err, data) {
-  if (err) throw err
-
-  console.log(JSON.stringify(data, null, "\t"))
+async function createTables() {
+  const createUserTableResponse = await dynamo.createUserTable()
+  console.log(JSON.stringify(createUserTableResponse, null, "\t"))
 }
+
+createTables()
