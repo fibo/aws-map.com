@@ -3,6 +3,7 @@
     "allowJs": false,
     "charset": "utf8",
     "esModuleInterop": true,
+    "jsx": "react",
     "module": "commonjs",
     "noImplicitUseStrict": true,
     "removeComments": true,
@@ -11,6 +12,7 @@
     "target": "es2017"
   },
   "include": [
-    "api/**/*"
+    "api/**/*",
+    "pwa/**/*"
   ]
 }
