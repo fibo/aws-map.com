@@ -6,6 +6,8 @@
     "jsx": "react",
     "module": "commonjs",
     "noImplicitUseStrict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "removeComments": true,
     "sourceMap": false,
     "strictNullChecks": true,
