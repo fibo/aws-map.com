@@ -13,6 +13,8 @@ class HomePage extends React.Component {
       <div>
         <Link to={CreateAccountPage.path}>Register</Link>
 
+        <br />
+
         <Link to={EnterPage.path}>Login</Link>
       </div>
     )

@@ -10,6 +10,7 @@
     "iam_create_role": "aws iam create-role --role-name ${npm_package_config_role} --assume-role-policy-document file://api/iam/trust-service.json --profile ${npm_package_config_profile}",
     "iam_create_policy": "aws iam create-policy --policy-name ${npm_package_config_policy} --policy-document file://api/iam/lambda-policy.json --profile ${npm_package_config_profile}",
     "predeploy": "npm run browserify",
+    "node-sass": "node-sass --include-path node_modules pwa/sass/main.scss --output-style compressed > public/css/main.css",
     "start": "budo pwa/index.tsx --live --pushstate --dir public --serve js/bundle.js --open -- -p tsify",
     "test": "echo \"Error: no test specified\" && exit 1",
     "tsc--noemit": "tsc --declaration --project . --noemit",
@@ -48,6 +49,7 @@
     "browserify": "^16.2.3",
     "budo": "^11.6.2",
     "dot-editorconfig": "^1.1.1",
+    "node-sass": "^4.12.0",
     "pre-commit": "^1.2.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
@@ -61,6 +63,7 @@
     "aws-lambda-res": "^1.0.0",
     "aws-sdk": "^2.465.0",
     "jsonwebtoken": "^8.5.1",
-    "not-defined": "^2.1.0"
+    "not-defined": "^2.1.0",
+    "trunx": "^0.23.1"
   }
 }
