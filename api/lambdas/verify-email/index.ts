@@ -3,7 +3,7 @@ import response from "aws-lambda-res"
 import * as customerBase from "../../customerBase"
 import { nakedDomain } from "../../domainNames"
 
-export async function handler(event, context) {
+export async function handler(event) {
   try {
     const { token } = event.pathParameters
 

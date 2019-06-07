@@ -10,13 +10,6 @@ import {
   EmailNotFoundError
 } from "./errors"
 
-interface IUserDocument {
-  emaiL: string
-  encryptedPassword: string
-  settings: {}
-  verified: boolean
-}
-
 const documentClient = new AWS.DynamoDB.DocumentClient()
 
 const getDocument = promisify(documentClient.get)
@@ -87,8 +80,18 @@ export async function createAccount({ email, encryptedPassword }) {
   })
 }
 
+export async function updatePassword(email: string, encryptedPassword: string) {
+  await putDocument({
+    Item: {
+      email,
+      encryptedPassword,
+    },
+    TableName: UserTableName
+  })
+}
+
 export async function verifyEmail(email: string) {
-  await documentClient.put({
+  await putDocument({
     Item: {
       email,
       verified: true,

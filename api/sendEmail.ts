@@ -41,14 +41,14 @@ function sendEmailWithCallback(destination: string, message: IEmailMessage, call
 
 const sendEmail = promisify(sendEmailWithCallback)
 
-export function createAccount(destinationEmail: string, token: string) {
+export async function createAccount(destinationEmail: string, token: string) {
   const emailMessage = createAccountEmail(token)
 
-  return sendEmail(destinationEmail, emailMessage)
+  await sendEmail(destinationEmail, emailMessage)
 }
 
-function resetPassword(destinationEmail: string, password: string) {
+export async function resetPassword(destinationEmail: string, password: string) {
   const emailMessage = resetPasswordEmail(password)
 
-  return sendEmail(destinationEmail, emailMessage)
+  await sendEmail(destinationEmail, emailMessage)
 }

@@ -10,6 +10,11 @@ import {
   UnauthorizedError,
 } from "./errors"
 
+interface IJwtData {
+  expiresAt: string
+  token: string
+}
+
 interface IJwtPayload {
   email: string
 }
@@ -22,7 +27,7 @@ if (no(secret)) {
   throw new MissingJwtSecretError()
 }
 
-export async function sign(payload: IJwtPayload): Promise<string> {
+export async function sign(payload: IJwtPayload): Promise<IJwtData> {
   // Set expiration to one month.
   const days = 30
   const expiresIn = 86400 * days
@@ -31,9 +36,7 @@ export async function sign(payload: IJwtPayload): Promise<string> {
   expirationDate.setDate(expirationDate.getDate() + days)
 
   try {
-    const { token } = await jwtSign(payload, secret, { algorithm, expiresIn })
-
-    return token
+    return await jwtSign(payload, secret, { algorithm, expiresIn })
   } catch (error) {
     throw error
   }

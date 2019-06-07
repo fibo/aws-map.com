@@ -1,4 +1,4 @@
-import * as history from "history"
+// import * as history from "history"
 import * as React from "react"
 import { Link } from "react-router-dom"
 
@@ -13,7 +13,7 @@ class HomePage extends React.Component {
       <div>
         <Link to={CreateAccountPage.path}>Register</Link>
 
-        <Link to={HomePage.path}>Login</Link>
+        <Link to={EnterPage.path}>Login</Link>
       </div>
     )
   }

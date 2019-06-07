@@ -53,6 +53,12 @@ export class MissingJwtSecretError extends APIError {
   }
 }
 
+export class MissingParameterError extends APIError {
+  constructor() {
+    super("Missing parameter")
+  }
+}
+
 export class UnauthorizedError extends APIError {
   constructor() {
     super("Unauthorized")
