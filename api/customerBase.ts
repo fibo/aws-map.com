@@ -64,7 +64,7 @@ export async function createAccount({ email, password }: IAccountCredentials) {
 export async function enterAccount({ email, password }: IAccountCredentials) {
   checkCredentials(email, password)
 
-  const user = await dynamo.getUser(email) || {}
+  const user = await dynamo.getUser(email)
 
   if (user.verified) {
     const encryptedPassword = passwordPolicy.encryptPassword(password)

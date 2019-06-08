@@ -1,7 +1,9 @@
 import * as AWS from "aws-sdk"
 import no from "not-defined"
-import { promisify } from "util"
 
+import {
+  IAccountUser,
+} from "./account"
 import { region } from "./region"
 
 AWS.config.update({ region })
@@ -12,90 +14,118 @@ import {
 
 const documentClient = new AWS.DynamoDB.DocumentClient()
 
-const getDocument = promisify(documentClient.get)
-const putDocument = promisify(documentClient.put)
-
 const service = new AWS.DynamoDB({ apiVersion: "2012-10-08" })
 
 export const tableNamePrefix = "AWSMap"
 
 const UserTableName = `${tableNamePrefix}User`
 
-function createUserTableWithCallback(callback) {
-  service.createTable({
-    AttributeDefinitions: [
-      { AttributeName: "email", AttributeType: "S" }
-    ],
-    KeySchema: [
-      { AttributeName: "email", KeyType: "HASH" }
-    ],
-    ProvisionedThroughput: { ReadCapacityUnits: 2, WriteCapacityUnits: 2 },
-    StreamSpecification: { StreamEnabled: false },
-    TableName: UserTableName
-  }, callback)
-}
-
-export const createUserTable = promisify(createUserTableWithCallback)
-
-export async function getUser(email) {
-  const data = await getDocument({
-    Key: { email },
-    ProjectionExpression: "accountCode, encryptedPassword, settings, verified",
-    TableName: UserTableName
-  })
-
-  if (no(data)) {
-    throw new EmailNotFoundError()
-  }
-
-  return data.Item
-}
-
-export async function emailExists(email) {
-  const data = documentClient.get({
-    Key: { email },
-    ProjectionExpression: "accountCode",
-    TableName: UserTableName
-  })
-
-  if (no(data)) {
-    return false
-  }
-
-  return true
-}
-
-export async function createAccount({ email, encryptedPassword }) {
-  const accountCode = new Date().getTime().toString(36) // generates random string
-
-  await documentClient.put({
-    Item: {
-      accountCode,
-      email,
-      encryptedPassword,
-      settings: {},
-      verified: false,
-    },
-    TableName: UserTableName
+export function createUserTable() {
+  return new Promise((resolve, reject) => {
+    service.createTable({
+      AttributeDefinitions: [
+        { AttributeName: "email", AttributeType: "S" }
+      ],
+      KeySchema: [
+        { AttributeName: "email", KeyType: "HASH" }
+      ],
+      ProvisionedThroughput: { ReadCapacityUnits: 2, WriteCapacityUnits: 2 },
+      StreamSpecification: { StreamEnabled: false },
+      TableName: UserTableName
+    }, (error, data) => {
+      if (error) {
+        reject(error)
+      } else {
+        resolve(data)
+      }
+    })
   })
 }
 
-export async function updatePassword(email: string, encryptedPassword: string) {
-  await putDocument({
-    Item: {
-      email,
-      encryptedPassword,
-    },
-    TableName: UserTableName
+export function getUser(email): Promise<IAccountUser> {
+  return new Promise((resolve, reject) => {
+    documentClient.get({
+      Key: { email },
+      ProjectionExpression: "accountCode, encryptedPassword, settings, verified",
+      TableName: UserTableName
+    }, (error, data) => {
+      if (error) {
+        reject(error)
+      } else {
+        if (no(data)) throw new EmailNotFoundError()
+
+        const {
+          encryptedPassword,
+          verified,
+        } = {
+          encryptedPassword: "",
+          verified: false,
+          ...data.Item
+        }
+
+        resolve({
+          encryptedPassword,
+          verified,
+        })
+      }
+    })
   })
 }
 
-export async function verifyEmail(email: string) {
-  await putDocument({
-    Item: {
-      email,
-      verified: true,
-    },
-    TableName: UserTableName
+export function emailExists(email) {
+  return new Promise((resolve, reject) => {
+    documentClient.get({
+      Key: { email },
+      ProjectionExpression: "accountCode",
+      TableName: UserTableName
+    }, (error, data) => {
+      if (error) {
+        reject(error)
+      } else {
+        if (no(data)) resolve(false)
+        else resolve(true)
+      }
+    })
+  })
+}
+
+export function createAccount({ email, encryptedPassword }) {
+  return new Promise((resolve, reject) => {
+    const accountCode = new Date().getTime().toString(36) // generates random string
+
+    documentClient.put({
+      Item: {
+        accountCode,
+        email,
+        encryptedPassword,
+        settings: {},
+        verified: false,
+      },
+      TableName: UserTableName
+    }, (error, data) => error ? reject(error) : resolve(data))
+  })
+}
+
+export function updatePassword(email: string, encryptedPassword: string) {
+  return new Promise((resolve, reject) => {
+    documentClient.put({
+      Item: {
+        email,
+        encryptedPassword,
+      },
+      TableName: UserTableName
+    }, (error, data) => error ? reject(error) : resolve(data))
+  })
+}
+
+export function verifyEmail(email: string) {
+  return new Promise((resolve, reject) => {
+    documentClient.put({
+      Item: {
+        email,
+        verified: true,
+      },
+      TableName: UserTableName
+    }, (error, data) => error ? reject(error) : resolve(data))
   })
 }

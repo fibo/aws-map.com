@@ -5,6 +5,11 @@ export interface IAccountCredentials {
   password: string
 }
 
+export interface IAccountUser {
+  encryptedPassword: string
+  verified: boolean
+}
+
 export interface IAuthentication {
   expiresAt?: string
   error?: IAPIError
