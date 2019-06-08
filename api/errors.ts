@@ -1,5 +1,10 @@
 /* tslint:disable max-classes-per-file */
 
+export interface IAPIError {
+  code: string
+  message: string
+}
+
 class APIError extends Error {
   toJSON() {
     return {

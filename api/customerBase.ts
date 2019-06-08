@@ -4,6 +4,9 @@ import * as passwordPolicy from "./passwordPolicy"
 import * as sendEmail from "./sendEmail"
 
 import {
+  IAccountCredentials
+} from "./account"
+import {
   EmailAlreadyRegisteredError,
   EmailNotFoundError,
   EmailNotVerifiedError,
@@ -11,11 +14,6 @@ import {
   InvalidPasswordError,
   MissingParameterError,
 } from "./errors"
-
-interface IAccountCredentials {
-  email: string
-  password: string
-}
 
 export function checkEmail(email) {
   if (typeof email !== "string") {

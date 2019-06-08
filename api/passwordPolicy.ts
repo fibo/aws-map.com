@@ -8,10 +8,9 @@ const minLength = 8
 
 const digits = "1234567890"
 const lowerCaseAsciiLetters = "abcdefghijklmnopqrstuvwxyz"
-const specialChars = ",:;.[]{}()<>=+!@#$%^&-_"
 const upperCaseAsciiLetters = lowerCaseAsciiLetters.toUpperCase()
 
-const allChars = digits + lowerCaseAsciiLetters + upperCaseAsciiLetters + specialChars
+const allChars = digits + lowerCaseAsciiLetters + upperCaseAsciiLetters
 
 function randomChar(characters) {
   const position = Math.floor(Math.random() * characters.length)
@@ -38,11 +37,11 @@ export function encryptPassword(password) {
 export function generatePassword() {
   const passwordChars = [
     randomChar(lowerCaseAsciiLetters),
+    randomChar(lowerCaseAsciiLetters),
+    randomChar(upperCaseAsciiLetters),
     randomChar(upperCaseAsciiLetters),
     randomChar(digits),
-    randomChar(specialChars),
-    randomChar(allChars),
-    randomChar(allChars),
+    randomChar(digits),
     randomChar(allChars),
     randomChar(allChars)
   ]

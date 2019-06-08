@@ -64,6 +64,8 @@
     "aws-sdk": "^2.465.0",
     "jsonwebtoken": "^8.5.1",
     "not-defined": "^2.1.0",
+    "react-redux": "^7.0.3",
+    "redux-thunk": "^2.3.0",
     "trunx": "^0.23.1"
   }
 }
