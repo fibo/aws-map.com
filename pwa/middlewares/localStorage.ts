@@ -11,9 +11,11 @@ export default function localStorageMiddleware() {
        case ENTER_ACCOUNT.SUCCESS:
          try {
            localStorage.setItem("authentication", JSON.stringify(action.data))
-         } catch (ignore) {
-           return next(action)
+         } catch (error) {
+           console.error(error)
          }
+
+         return next(action)
 
        case CHECK_AUTHENTICATION:
          try {
@@ -78,6 +80,8 @@ export default function localStorageMiddleware() {
 
        case EXIT_ACCOUNT:
          localStorage.removeItem("authentication")
+
+         return next(action)
 
        default: return next(action)
      }
